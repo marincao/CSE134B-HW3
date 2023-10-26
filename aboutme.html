@@ -49,11 +49,11 @@
             <button onclick="showContent()">Show Pic</button>
 
             <script>
-              function showContent() {
-                let temp = document.getElementsByTagName("template");
-                let clon = temp.content.cloneNode(true);
-                document.body.appendChild(clon);
-              }
+              function cloneTemplate() {
+                const template = document.getElementById('template');
+                const clone = document.importNode(template.content, true);
+                document.body.appendChild(clone);
+                }
             </script>
         </section>
     </main>
