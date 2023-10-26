@@ -3,16 +3,40 @@
 
 <head>
     <meta charset="utf-8" />
-	<meta name="description" content="HW2 Web page for CSE 134B" />
+    <meta name="title" content="Marin Cao's Page" />
+	<meta name="description" content="Marin Cao's personal website" />
+    <title>Marin Cao's Homepage</title>
+    <script>
+		window.addEventListener('load', function () {
+			let time = window.performance.timing,
+				complete = time.domComplete - time.domLoading;
+			document.getElementById('page-load-info').innerHTML = `<strong>Page Loaded in ${parseInt(complete)}ms
+			 on ${new Date().toLocaleString("en-US")}</strong>`;
+		});
+	</script>
 </head>
 
 <body>
 	<header>
-		<h1>CSE 134B Homework 1 Website</h1>
-    </header>
+		<h1 style="color:aqua" >Welcome to Marin Cao's Website!</h1>
+    <details>
+      <nav>
+        <ul>
+          <li><a href="aboutme.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </details>
+  </header>
+  <main>
+    <section>
+      <h2>Whis is this site?</h2>
+      <p>Here's some cool <i>V I S U A L</i>!</p>
+    </section>
+  </main>
     
-    <footer>
-		<hr/>
+  <footer>
 		<p>💯This page was made with &hearts; by YOUR NAME HERE 💯</p>
 	</footer>
 	
