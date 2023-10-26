@@ -41,18 +41,18 @@
                 <figcaption>I recently traveled to San Francisco</figcaption>
             </figure>
 
-            <template id = "template">
-                <h2>Logo</h2>
-                <img src="images/logo.jpg" width="200" height="200">
+            <button onclick="showContent()">Show hidden content</button>
+
+            <template>
+                <h2>LOGO</h2>
+                <img src="images/logo.jpg" width="300" height="300">
             </template>
-            
-            <button onclick="cloneTmeplate()">Show Pic</button>
 
             <script>
-              function cloneTemplate() {
-                const template = document.getElementById('template');
-                const clone = document.importNode(template.content, true);
-                document.body.appendChild(clone);
+                function showContent() {
+                let temp = document.getElementsByTagName("template")[0];
+                let clon = temp.content.cloneNode(true);
+                document.body.appendChild(clon);
                 }
             </script>
         </section>
