@@ -42,7 +42,7 @@
 			      </video>
         </section>
         <code>print("Hello World")</code>
-        <canvas id="canvas_art" width="200" height="100"></canvas>
+        <canvas id="canvas_art" width="200" height="40"></canvas>
         <script>
           var c = document.getElementById("canvas_art");
           var ctx = c.getContext("2d");
@@ -50,6 +50,17 @@
           ctx.fillText("Hello Word", 20, 30);
         </script>
       <p><strong>Here's some cool <i>V I S U A L</i>!</strong></p>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"></math>
+        <mrow>
+          <mi>E</mi> 
+          <mo> = </mo> 
+          <mi> m </mi> 
+          <msup>
+            <mi>c</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </math>
     </section>
   </main>
   
@@ -60,6 +71,19 @@
   <form>
     <fieldset>
       <legend>Leave a comments!</legend>
+      <label for="major">Select your Major</label>
+      <select id = "major">
+        <optgroup label="CSE Department">
+          <option value="cs">CS</option>
+          <option value="ce">CE</option>
+        </optgroup>
+        <optgroup label="ECE Department">
+          <option value="cee">CE</option>
+          <option value="ee">EE</option>
+        </optgroup>
+        <option value="other">Others</option>
+      </select>
+      <br>
       <label for="rating">Rate this site:</label>
       <datalist id ="level">
         <option value = "0"></option>
@@ -74,29 +98,31 @@
       <label for="text">Comments:</label>
       <textarea id="text">Your comments here...</textarea>
       <br>
+      <button type="submit">Save</button>
     </fieldset>
   </form>
-  <details>
-    <summary>
-      "Thank You"
-    </summary>
-    "for your comments!"
-  </details>
+
 
   <table>
-    <caption>Table</caption>
+    <caption>Rating Count</caption>
     <tbody>
       <tr>
         <th>Good</th>
         <th>Bad</th>
       </tr>
       <tr>
-        <td>5</td>
+        <td>1</td>
         <td>5</td>
       </tr>
     </tbody>
   </table>
-
+  <hr>
+  <details>
+    <summary>
+      "Thank You"
+    </summary>
+    "for your comments!"
+  </details>
 
   <footer>
     <hr>
