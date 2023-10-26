@@ -4,16 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="title" content="Marin Cao's Page" />
-	<meta name="description" content="Marin Cao's personal website" />
+	  <meta name="description" content="Marin Cao's personal website" />
     <title>Marin Cao's Homepage</title>
-    <script>
-		window.addEventListener('load', function () {
-			let time = window.performance.timing,
-				complete = time.domComplete - time.domLoading;
-			document.getElementById('page-load-info').innerHTML = `<strong>Page Loaded in ${parseInt(complete)}ms
-			 on ${new Date().toLocaleString("en-US")}</strong>`;
-		});
-	</script>
 </head>
 
 <body>
@@ -36,14 +28,28 @@
       <section class="img">
         <img src="images/bear.png" alt="Warren Bear" height="430" width="700" />
         <br />
+          <article>
+            <h3>Warren Bear</h3>
+            <p>
+              "This is located next to <em>CSE</em> building. "
+            </p>
+          </article>
+      </section>
+    </section>
         <section class="video">
           <h2>UCSD Promo Video</h2>
 			      <video controls height="393" width="700">
-				    <source src="videos/videoplayback.mp4" type="video/mp4" />
-				    <div class="error">Your browser does not support the video tag.</div>
+				      <source src="videos/videoplayback.mp4" type="video/mp4" />
+				      <div class="error">Your browser does not support the video tag.</div>
 			      </video>
         </section>
-        </section>
+        <canvas id="canvas_art" width="200" height="200"></canvas>
+        <script>
+          var c = document.getElementById("canvas_art");
+          var ctx = c.getContext("2d");
+          ctx.font = "30px Arial"
+          ctx.fillText("Marin Cao", 10, 50);
+        </script>
       <p><strong>Here's some cool <i>V I S U A L</i>!</strong></p>
     </section>
   </main>
