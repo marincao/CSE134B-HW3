@@ -2,11 +2,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Blank HTML Page</title>
+    <title>About Me</title>
+    <link rel="icon" type="image/x-icon" href="\images\ico.png">
+    <style>
+        header {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1 style="color:aqua" >Marin Cao's Bio</h1>
+        <a href="index.html" id="Back To Home">Back to Homepage</a>
     </header>
     <main>
         <section>
@@ -18,43 +25,12 @@
             
             Thanks!
         </pre>
-        <ol>
+        <ul>
             <li>Age: 24</li>
             <li>Gender: Male</li>
             <li>Major: Computer Engineering</li>
-        </ol>
+        </ul>
         <aside>I was <span style="color: blue; font-weight: bold;">Electrial Engineering</span> major when I first came to UCSD.</aside>
-        <h2>This is a url.</h2>
-        <iframe src="https://www.google.com" height="200" width="300" title="Iframe Example"></iframe>
-        </section>
-
-        <section>
-            <h2>Picture of Me</h2>
-            <picture>
-                <source srcset="images/pic.jpg" type = "image/jpg" width="400" height="300">
-                <source srcset="images/pic.webp" type = "image/webp" width="400" height="300">
-                <img src="images/pic.jpg" alt="Original">
-            </picture>
-
-            <figure>
-                <img src="images/pic2.webp" width="400" height="300">
-                <figcaption>I recently traveled to San Francisco</figcaption>
-            </figure>
-
-            <button onclick="showContent()">Show hidden content</button>
-
-            <template>
-                <h2>LOGO</h2>
-                <img src="images/logo.jpg" width="300" height="300">
-            </template>
-
-            <script>
-                function showContent() {
-                let temp = document.getElementsByTagName("template")[0];
-                let clon = temp.content.cloneNode(true);
-                document.body.appendChild(clon);
-                }
-            </script>
         </section>
     </main>
 </body>

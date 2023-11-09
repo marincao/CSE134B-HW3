@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<header>
+	<header>  
 		<h1 style="color:blueviolet">Welcome to Marin Cao's Website!</h1>
       <nav>
         <ul>
@@ -25,18 +25,22 @@
 
   <main>
     <section>
-      <h2>Check this <i>image</i>!</h2>
+      <h2>Hover on this <i>image</i>!</h2>
       <section class="img">
-        <img src="images/bear.png" alt="Warren Bear" height="430" width="700" />
+        <picture>
+          <source srcset="images/pic.jpg" type = "image/jpg" width="400" height="300">
+          <source srcset="images/pic.webp" type = "image/webp" width="400" height="300">
+          <img src="images/pic.jpg" alt="My pictrue">
+        </picture>
         <br>
-          <article>
-            <h3>Warren Bear</h3>
-            <p>
-              "This is located next to <em>CSE</em> building. "
-            </p>
-          </article>
+        <article>
+          <p>
+            "I love <em>LA JOLLA</em> so much! "
+          </p>
+        </article>
       </section>
     </section>
+
     <section class="video">
       <h2>UCSD Promo Video</h2>
 			  <video controls height="393" width="700">
@@ -80,31 +84,6 @@
       <button type="submit">Save</button>
     </fieldset>
   </form>
-
-
-  <table>
-    <caption>Rating</caption>
-    <colgroup>
-      <col style="background-color: lightgray;">
-    </colgroup>
-    <tbody>
-      <tr>
-        <th>Good</th>
-        <th>Bad</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>5</td>
-      </tr>
-    </tbody>
-  </table>
-  <hr>
-  <details>
-    <summary>
-      "Thank You"
-    </summary>
-    "for your comments!"
-  </details>
 
   <footer>
     <hr>
