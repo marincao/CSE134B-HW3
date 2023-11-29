@@ -52,38 +52,31 @@
   </main>
   
 
-  <form>
-    <fieldset>
-      <legend>Leave a comments!</legend>
-      <label for="major">Select your Major</label>
-      <select id = "major">
-        <optgroup label="CSE Department">
-          <option value="cs">CS</option>
-          <option value="ce">CE</option>
-        </optgroup>
-        <optgroup label="ECE Department">
-          <option value="cee">CE</option>
-          <option value="ee">EE</option>
-        </optgroup>
-        <option value="other">Others</option>
-      </select>
-      <br>
-      <label for="rating">Rate this site:</label>
-      <datalist id ="level">
-        <option value = "0"></option>
-        <option value = "1"></option>
-        <option value = "2"></option>
-        <option value = "3"></option>
-        <option value = "4"></option>
-        <option value = "5"></option>
-      </datalist>
-      <input list="level" id="rating">
-      <br>
-      <label for="text">Comments:</label>
-      <textarea id="text">Your comments here...</textarea>
-      <br>
-      <button type="submit">Save</button>
-    </fieldset>
+  <form action="https://httpbin.org/post" method="post" id="contact-form">
+    <form-field class="name">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <output id="error_name"></output>
+      <output id="info_name"></output>
+    </form-field>
+    <form-field class="email">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <output id="error_email"></output>
+      <output id="info_email"></output>
+    </form-field>
+    <form-field class="comments">
+      <label for="comments">Comments:</label>
+      <p id="message"></p>
+      <textarea id="comments" name="comments" maxlength="200" required></textarea>
+      <output id="error_comments"></output>
+      <output id="info_comments"></output>
+    </form-field>
+
+    <input type="hidden" name="possible_bot" value="true"><br>
+    <form-field>
+      <button id="submit" type="submit">Submit</button>
+    </form-field>
   </form>
 
   <footer>
