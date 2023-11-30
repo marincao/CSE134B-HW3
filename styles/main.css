@@ -130,13 +130,6 @@ input, textarea{
   margin-bottom: 10px;
 }
 
-form textarea {
-  width: 120%;
-  height: 50%;
-  margin-left: 2%;
-  padding: 3% 2%;
-  border-radius: 20px;
-}
 
 /****** footer ******/
 footer {
