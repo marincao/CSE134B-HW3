@@ -7,21 +7,6 @@
     <link href="styles/main.css" rel="stylesheet" />
     <title>Contact Me</title>
     <style>
-        @keyframes flash {
-            0%, 100% {
-                background-color: inherit;
-                color: inherit;
-            }
-            50% {
-                background-color: #ffcccc;
-                color: #ff0000;
-            }
-        }
-
-        .flash {
-            animation: flash 0.5s;
-        }
-        
         main {
             display: flex;
                 flex-direction: column;
@@ -49,25 +34,9 @@
             margin-bottom: 10px;
         }
         output {
-            margin-top: 5px;
+            margin-top: 10px;
             color: red;
-        }
-
-        output {
-            margin-top: 5px;
-            color: red;
-        }
-
-        output.info {
-            color: green;
-        }
-
-        output.warning {
-            color: orange;
-        }
-
-        output.error {
-            color: red;
+            font-size: 14px;
         }
 
     </style>
@@ -84,19 +53,16 @@
             <form-field class="name">
               <label for="name">Name:</label>
               <input type="text" id="name" name="name" placeholder="Name (required)" required>
-              <output for="name" class="error"></output>
             </form-field>
 
             <form-field class="email">
               <label for="email">Email:</label>
               <input type="email" id="email" name="email" placeholder="Email (required)" required>
-              <output for="email" class="error"></output>
             </form-field>
 
             <form-field class="comments">
               <label for="comments">Comments:</label>
               <textarea id="comments" name="comments" maxlength="200" placeholder="Your Comment... (required)" required></textarea>
-              <output for="comments" class="info"></output>
             </form-field>
         
             <input type="hidden" name="possible_bot" value="true"><br>
@@ -104,14 +70,13 @@
             <form-field>
               <button id="submit" type="submit">Submit</button>
             </form-field>
-
-            <output class="info" for="contactForm"></output>
+            <output id="errorOutput" aria-live="assertive"></output>
+            <output id="infoOutput" aria-live="polite"></output>
           </form>
     </main>
     <footer>
         <hr>
         <p>Made by Marin Cao</p>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
