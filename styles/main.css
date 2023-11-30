@@ -112,46 +112,22 @@ a:active { background-color: yellow; border: 4px solid red;}
 }
 
 #contact-form {
-  margin: auto;
   display: flex;
-  flex-direction: row;
-  padding-top: 5%;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 60%;
-}
-
-#contact_links_container {
-  background-color: var(--secondary-bg-color);
-  border-radius: 10%;
-  width: 50%;
-  height: 20rem;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 form {
   padding: 1em;
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-form input {
-  padding: 3% 2%;
-  margin-bottom: 3%;
-  margin-left: 2%;
-}
-
-
-form input::placeholder {
-  color:grey;
+input, textarea{
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 form textarea {
