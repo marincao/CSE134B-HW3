@@ -7,21 +7,6 @@
     <link href="styles/main.css" rel="stylesheet" />
     <title>Contact Me</title>
     <style>
-        @keyframes flash {
-            0%, 100% {
-                background-color: inherit;
-                color: inherit;
-            }
-            50% {
-                background-color: #ffcccc;
-                color: #ff0000;
-            }
-        }
-
-        .flash {
-            animation: flash 0.5s;
-        }
-        
         main {
             display: flex;
                 flex-direction: column;
@@ -48,26 +33,27 @@
             padding: 26px;
             margin-bottom: 10px;
         }
-        output {
-            margin-top: 5px;
-            color: red;
-        }
 
-        output {
-            margin-top: 5px;
-            color: red;
+        form {
+            max-width: 100%;
+            &#contact-form {
+                & label#email-label, label#comments-label {
+                    margin-top: 0.5rem;
+                }
+                & label {
+                    display: block;
+                }
+            }
         }
-
-        output.info {
-            color: green;
+        body {
+            color: black;
+            background-color: rgb(241, 241, 241);
+            text-align: center;
+            justify-content: center;
         }
-
-        output.warning {
-            color: orange;
-        }
-
-        output.error {
-            color: red;
+        .dark-theme {
+            color: white;
+            background-color: rgb(34, 29, 29);
         }
 
     </style>
@@ -79,39 +65,54 @@
         <a href="index.html" id="Back To Home">Back to Homepage</a>
     </header>
     <main>
-        <h3>Leave a Comments!</h3>
-        <form action="https://httpbin.org/post" method="post" id="contactForm">
-            <form-field class="name">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" placeholder="Name (required)" required>
-              <output for="name" class="error"></output>
-            </form-field>
-
-            <form-field class="email">
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" placeholder="Email (required)" required>
-              <output for="email" class="error"></output>
-            </form-field>
-
-            <form-field class="comments">
-              <label for="comments">Comments:</label>
-              <textarea id="comments" name="comments" maxlength="200" placeholder="Your Comment... (required)" required></textarea>
-              <output for="comments" class="info"></output>
-            </form-field>
-        
-            <input type="hidden" name="possible_bot" value="true"><br>
-
-            <form-field>
-              <button id="submit" type="submit">Submit</button>
-            </form-field>
-
-            <output class="info" for="contactForm"></output>
-          </form>
+        <script src="script.js"></script>
+            <h2 id="contact-header">Contact Me!</h2>
+            <form id="contact-form" name="contact-form" action="https://httpbin.org/post" method="post">
+                <form-field label="name">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="name" oninvalid="document.getElementById('name-error').textContent='Please entert a valid name.'" required>
+                    <output name="name-info" id="name-info" for="name"></output>
+                    <output name="name-error" id="name-error" for="name"></output>
+                </form-field>
+                <form-field label="email">
+                    <label id="email-label" for="email">Email: </label>
+                    <input type="email" name="email" id="email" oninvalid="document.getElementById('email-error').textContent='Please enter a valid email.'" required>
+                    <output name="email-info" id="email-info" for="email"></output>
+                    <output name="email-error" id="email-error" for="email"></output>
+                </form-field>
+                <form-field label="comments">
+                    <label id="comments-label" for="comments">Comments: </label>
+                    <textarea id="comments" name="comments" rows="5" cols="50" maxlength="200" oninvalid="document.getElementById('comments-error').textContent='Please enter valid comments.'" required></textarea>
+                    <output name="comments-info" id="comments-info" for="comments"></output>
+                    <output name="comments-error" id="comments-error" for="comments"></output>
+                </form-field>
+                <form-field label="submit">
+                    <button id="submit-button">Submit</button>
+                </form-field>
+                <input type="hidden" name="possible_bot" id="possible_bot" value="true">
+                <input type="hidden" name="form-errors" id="form-errors" value="{}">
+            </form>
     </main>
+    <div class="toggle">
+        <br>
+        <button onclick = "changeMode()" id = "button"> Dark Mode </button>
+        <script>
+            function changeMode() {
+                var body = document.body;
+                body.classList.toggle("dark-theme");
+                let button = document.getElementById('button');
+                if (button.innerHTML == "Dark Mode") {
+                    button.innerHTML = "Light Mode";
+                } else {
+                    button.innerHTML = "Dark Mode"
+                }
+            }
+        </script>
+    </div>
     <footer>
         <hr>
         <p>Made by Marin Cao</p>
     </footer>
-    <script src="script.js"></script>
+
 </body>
 </html>

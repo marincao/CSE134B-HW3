@@ -1,158 +1,117 @@
-/**
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('contactForm');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const commentsInput = document.getElementById('comments');
-    const infoOutput = document.querySelector('output.info');
+const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ-']+(\s[A-Za-zÀ-ÖØ-öø-ÿ-']+)*$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const textRegex = /^[\s\S]{0,200}$/;
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const username = document.getElementById("name");
+    const userEmail = document.getElementById("email");
+    const userComment = document.getElementById("comments");
+    const nameError = document.getElementById("name-error");
+    const emailError = document.getElementById("email-error");
+    const commentError = document.getElementById("comments-error");
+    const commentInfo = document.getElementById("comments-info");
     const formErrors = [];
-
-    form.addEventListener('submit', function (event) {
-        // Check validity using Constraint Validation API
-        if (!form.checkValidity()) {
+    const errors = document.getElementById("form-errors");
+    commentInfo.innerHTML = "Characters left: 200";
+    /** 
+    nameError.innerHTML = "";
+    emailError.innerHTML = "";
+    commentError.innerHTML = "";
+    **/
+    document.getElementById("submit-button").addEventListener("click", (event) => {
+        validComments = textRegex.test(userComment.value);
+        validName = nameRegex.test(username.value);
+        validEmail = emailRegex.test(userEmail.value);
+        if (!(validComments && validName && validEmail)) {
+            let errorList = {
+                name: username.value,
+                email: userEmail.value,
+                comments: userComment.value,
+                error: "Unknown error"
+            };
+            if (!validName) {
+                username.setCustomValidity("Name Error");
+                errorList.error = "name error";
+            }
+            else if (!validEmail) {
+                userEmail.setCustomValidity("Email Format Error");
+                errorList.error = "email error";
+            }
+            else if (!validComments) {
+                if (userComment.value.length > 200) {
+                    userComment.setCustomValidity("Comments Too Long");
+                    errorList.error = "comments too long";
+                }
+                else {
+                    userComment.setCustomValidity("Comments Error");
+                    errorList.error = "comments error";
+                }
+            }
+            formErrors.push(JSON.stringify(errorList));
             event.preventDefault();
-            // Display custom error messages
-            displayErrorMessages();
-            // Submit form errors to the server-side
-            submitFormErrors();
-        } else {
-            infoOutput.textContent = ''; // Clear previous info messages
+        }
+        else {
+            userComment.setCustomValidity("");
+            username.setCustomValidity("");
+            userEmail.setCustomValidity("");
+            errors.value = formErrors;
+        }
+        userComment.reportValidity();
+        username.reportValidity();
+        userEmail.reportValidity();
+    });
+    
+    userComment.addEventListener("input", function (e) {
+        commentError.classList.remove("form-error");
+        commentInfo.innerHTML = "Characters left: " + (200 - e.target.value.length);
+        validComments = textRegex.test(e.target.value);
+        if (!validComments) {
+            if (e.target.value.length < 1) commentError.innerHTML = "Please enter proper comments.";
+            commentError.classList.add("form-error");
+        }
+        else commentError.innerHTML = "";
+    });
+    username.addEventListener("input", function (e) {
+        nameError.classList.remove("form-error");
+        validName = nameRegex.test(e.target.value);
+        if (!validName) {
+            nameError.innerHTML = "Please enter a valid name.";
+            nameError.classList.add("form-error");
+            username.style.backgroundColor = "rgb(255, 179, 178)";
+        }
+        else {
+            nameError.innerHTML = "";
+            username.style.backgroundColor = "white";
         }
     });
-
-    // Display custom error messages
-    function displayErrorMessages() {
-        validateField(nameInput);
-        validateField(emailInput);
-        validateField(commentsInput);
-    }
-
-    // Validate individual field
-    function validateField(field) {
-        if (!field.checkValidity()) {
-            field.classList.add('flash');
-            const errorOutput = document.querySelector(`output[for="${field.id}"]`);
-            const errorMessage = field.validationMessage;
-            errorOutput.textContent = errorMessage;
-            errorOutput.classList.add('error');
-            formErrors.push({ field: field.id, message: errorMessage });
-            setTimeout(() => {
-                field.classList.remove('flash');
-                errorOutput.classList.remove('error');
-                errorOutput.textContent = '';
-            }, 3000);
+    userEmail.addEventListener("input", function (e) {
+        emailError.classList.remove("form-error");
+        validEmail = emailRegex.test(e.target.value);
+        if (!validEmail) {
+            emailError.innerHTML = "Please enter a valid email.";
+            emailError.classList.add("form-error");
+            userEmail.style.backgroundColor = "rgb(255, 179, 178)";
         }
-    }
-
-    // Masking mechanism for disallowed characters
-    nameInput.addEventListener('input', function () {
-        const maskedValue = nameInput.value.replace(/[^a-zA-Z ]/g, '');
-        if (nameInput.value !== maskedValue) {
-            nameInput.value = maskedValue;
-            flashField(nameInput, 'Illegal characters not allowed.');
+        else {
+            emailError.innerHTML = "";
+            userEmail.style.backgroundColor = "white";
         }
     });
-
-    emailInput.addEventListener('input', function () {
-        const maskedValue = emailInput.value.replace(/[^a-zA-Z0-9@.]/g, '');
-        if (emailInput.value !== maskedValue) {
-            emailInput.value = maskedValue;
-            flashField(emailInput, 'Illegal characters not allowed.');
-        }
-    });
-
-    // Character countdown for comments textarea
-    commentsInput.addEventListener('input', function () {
-        const maxLength = parseInt(commentsInput.getAttribute('maxlength'));
-        const remainingChars = maxLength - commentsInput.value.length;
-
-        const infoOutput = document.querySelector('output[for="comments"]');
-        if (remainingChars > 10) {
-            infoOutput.textContent = `Characters remaining: ${remainingChars}`;
-            infoOutput.classList.remove('warning', 'error');
-        } else if (remainingChars > 0) {
-            infoOutput.textContent = `Warning: ${remainingChars} characters remaining`;
-            infoOutput.classList.remove('error');
-            infoOutput.classList.add('warning');
-        } else {
-            infoOutput.textContent = 'Error: Maximum character limit reached';
-            infoOutput.classList.remove('warning');
-            infoOutput.classList.add('error');
-        }
-    });
-
-    // Flash animation for invalid input
-    function flashField(field, message) {
-        field.classList.add('flash');
-        const errorOutput = document.querySelector(`output[for="${field.id}"]`);
-        errorOutput.textContent = message;
-        errorOutput.classList.add('error');
-        formErrors.push({ field: field.id, message });
-        setTimeout(() => {
-            field.classList.remove('flash');
-            errorOutput.classList.remove('error');
-            errorOutput.textContent = '';
-        }, 3000);
-    }
-
-    // Submit form errors to the server-side
-    function submitFormErrors() {
-        const formErrorsInput = document.createElement('input');
-        formErrorsInput.type = 'hidden';
-        formErrorsInput.name = 'form_errors';
-        formErrorsInput.value = JSON.stringify(formErrors);
-        form.appendChild(formErrorsInput);
-    }
-});
-**/
-const username = document.getElementById("name");
-const email = document.getElementById("email");
-const comment = document.getElementById("comments");
-
-const form_errors = new Array();
-
-
-username.addEventListener("submit", (event) => {
-    if(!username.checkValidity()){
-        username.setCustomValidity("Last name required!");   
-        form_errors.push("lname_error");
-        event.preventDefault(); 
-        event.reportValidity();
-    }
-    else{
-        username.setCustomValidity("");
-    }
 });
 
-email.addEventListener("submit", (event) => {
-    if(!email.checkValidity()){
-        email.setCustomValidity("Email address required!");    
-        form_errors.push("email_error");
-        event.preventDefault();
-        event.reportValidity();
-    }
-    else{
-        email.setCustomValidity("");
-    }
-});
 
-comment.addEventListener("submit", (event) => {
-    if(!comment.checkValidity()){
-        comment.setCustomValidity("Comment required!");    
-        form_errors.push("comment_error");
-        event.preventDefault();
-        event.reportValidity();
+function changeMode() {
+    var body = document.body;
+    
+    // toggle the theme
+    body.classList.toggle("dark-theme");
+    let button = document.getElementById('button');
+    
+    // change the button text
+    if (button.innerHTML == "Dark Mode") {
+       button.innerHTML = "Normal Mode";
+    } else {
+       button.innerHTML = "Dark Mode"
     }
-    else{
-        comment.setCustomValidity("");
-    }
-});
-
-const resp = await fetch('https://httpbin.org/post', {
-  method: 'POST',
-  mode: 'cors',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(form_errors)
-});
+ }
